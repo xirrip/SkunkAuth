@@ -1,0 +1,49 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.1.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'ch.skunky'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 11
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.boot:spring-boot-starter-security')
+
+    compile('org.springframework:spring-jdbc')
+    compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.3.4.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-jwt', version: '1.0.9.RELEASE'
+
+    runtimeOnly('mysql:mysql-connector-java')
+
+    compile('org.apache.commons:commons-lang3')
+    compile('com.fasterxml.jackson.core:jackson-databind')
+
+    compile('javax.xml.bind:jaxb-api:2.2.11')
+    compile('com.sun.xml.bind:jaxb-core:2.2.11')
+    compile('com.sun.xml.bind:jaxb-impl:2.2.11')
+    compile('javax.activation:activation:1.1.1')
+
+    implementation('org.springframework.boot:spring-boot-starter-actuator')
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('org.springframework.security:spring-security-test')
+}
