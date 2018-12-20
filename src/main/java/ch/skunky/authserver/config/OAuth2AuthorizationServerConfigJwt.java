@@ -22,6 +22,11 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 /**
+ * Official Spring IO guide: (very long)
+ * https://spring.io/guides/tutorials/spring-security-and-angular-js/
+ */
+
+/**
  * Testing the token service:
  * curl fooClientIdPassword:secret@localhost:8081/spring-security-oauth-server/oauth/token -d grant_type=password -d username=tom -d password=111
  * -> returns a token! (it is still not available under /tokens endpoint?!)
@@ -57,7 +62,9 @@ public class OAuth2AuthorizationServerConfigJwt extends AuthorizationServerConfi
                 .and().withClient("fooClientIdPassword")
                     .secret(passwordEncoder().encode("secret"))
                     .authorizedGrantTypes("password", "authorization_code", "refresh_token")
-                    .scopes("foo", "read", "write").accessTokenValiditySeconds(3600)
+                    .scopes("foo", "read", "write")
+                    // .accessTokenValiditySeconds(3600)
+                    .accessTokenValiditySeconds(60)
                     // 1 hour
                     .refreshTokenValiditySeconds(2592000)
                     // 30 days
