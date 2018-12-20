@@ -1,5 +1,9 @@
 package ch.skunky.authserver.config;
 
+import ch.skunky.authserver.model.User;
+import ch.skunky.authserver.repository.UserRepository;
+import ch.skunky.authserver.service.SkunkUserPrincipal;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -15,9 +19,15 @@ public class CustomTokenEnhancer implements TokenEnhancer {
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
         final Map<String, Object> additionalInfo = new HashMap<>();
-        additionalInfo.put("organization", authentication.getName() + randomAlphabetic(4));
+
+        SkunkUserPrincipal principal = (SkunkUserPrincipal) authentication.getPrincipal();
+        User user = principal.getUser();
+
+        additionalInfo.put("username", user.getUsername());
+        additionalInfo.put("email", user.getEmail());
+        additionalInfo.put("grants", user.getRoles());
+
         ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
-        System.out.println("added additional info: " + accessToken.toString());
         return accessToken;
     }
 }

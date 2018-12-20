@@ -28,25 +28,30 @@ public class TokenController {
     @Resource(name = "tokenStore")
     private TokenStore tokenStore;
 
-    @RequestMapping(method = RequestMethod.POST, value = "/oauth/token/revokeById/{tokenId}")
-    @ResponseBody
-    public void revokeToken(HttpServletRequest request, @PathVariable String tokenId) {
-        System.out.println("revoking token " + tokenId);
-        tokenServices.revokeToken(tokenId);
-    }
-
+    // the current token store does not store tokens :-)
+    /*
     @RequestMapping(method = RequestMethod.GET, value = "/tokens")
     @ResponseBody
     public List<String> getTokens() {
         Collection<OAuth2AccessToken> tokens = tokenStore.findTokensByClientId("sampleClientId");
         return Optional.ofNullable(tokens).orElse(Collections.emptyList()).stream().map(OAuth2AccessToken::getValue).collect(Collectors.toList());
     }
+    */
 
+    /*
     @RequestMapping(method = RequestMethod.GET, value = "/tokens/{clientId}")
     @ResponseBody
     public List<String> getTokensForClient(@PathVariable String clientId) {
         Collection<OAuth2AccessToken> tokens = tokenStore.findTokensByClientId(clientId);
         return Optional.ofNullable(tokens).orElse(Collections.emptyList()).stream().map(OAuth2AccessToken::getValue).collect(Collectors.toList());
+    }
+    */
+
+    @RequestMapping(method = RequestMethod.POST, value = "/oauth/token/revokeById/{tokenId}")
+    @ResponseBody
+    public void revokeToken(HttpServletRequest request, @PathVariable String tokenId) {
+        System.out.println("revoking token " + tokenId);
+        tokenServices.revokeToken(tokenId);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/tokens/revokeRefreshToken/{tokenId:.*}")

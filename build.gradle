@@ -32,10 +32,15 @@ dependencies {
     compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.3.4.RELEASE'
     compile group: 'org.springframework.security', name: 'spring-security-jwt', version: '1.0.9.RELEASE'
 
-    runtimeOnly('mysql:mysql-connector-java')
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    // need a database...
+    runtimeOnly group: 'mysql', name: 'mysql-connector-java', version: '5.1.13'
 
     compile('org.apache.commons:commons-lang3')
     compile('com.fasterxml.jackson.core:jackson-databind')
+
+    compileOnly('org.projectlombok:lombok')
+    annotationProcessor('org.projectlombok:lombok')
 
     compile('javax.xml.bind:jaxb-api:2.2.11')
     compile('com.sun.xml.bind:jaxb-core:2.2.11')
