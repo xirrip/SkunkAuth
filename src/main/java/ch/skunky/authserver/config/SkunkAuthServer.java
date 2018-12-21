@@ -17,10 +17,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan(basePackages = { "ch.skunky.authserver.config", "ch.skunky.authserver.model"})
 @ComponentScan(basePackages = { "ch.skunky.authserver.config", "ch.skunky.authserver.controller", "ch.skunky.authserver.service"})
 @EnableJpaRepositories("ch.skunky.authserver.repository")
-public class AuthorizationServerApplication extends SpringBootServletInitializer {
+public class SkunkAuthServer extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        SpringApplication.run(AuthorizationServerApplication.class, args);
+        SpringApplication.run(SkunkAuthServer.class, args);
     }
 
 }
