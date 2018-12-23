@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
 
@@ -27,6 +29,12 @@ public class UserService {
     private boolean userExist(final User user) {
         return (userRepository.findByEmail(user.getEmail()) != null) ||
                 (userRepository.findByUsername(user.getUsername()) != null);
+    }
+
+    public boolean noAdminUsersAvailable(){
+        Optional<User> adminUser = userRepository.findAll()
+                .stream().filter(u -> u.getRoles().contains("admin")).findAny();
+        return adminUser.isEmpty();
     }
 
 }
