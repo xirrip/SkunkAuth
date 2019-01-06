@@ -62,8 +62,8 @@ public class OAuth2AuthorizationServerConfigJwt extends AuthorizationServerConfi
                     .secret(passwordEncoder().encode("secret"))
                     .authorizedGrantTypes("password", "authorization_code", "refresh_token")
                     .scopes("foo", "read", "write")
-                    .accessTokenValiditySeconds(30)
-                    // .accessTokenValiditySeconds(3600)
+                    // .accessTokenValiditySeconds(30)
+                    .accessTokenValiditySeconds(3600)
                     // 1 hour
                     .refreshTokenValiditySeconds(2592000)
                     // 30 days
